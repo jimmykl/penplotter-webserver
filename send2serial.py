@@ -142,6 +142,14 @@ def sendToPlotter(socketio, hpglfile, port = 'COM3', baud = 9600, plotter = '747
             socketio.emit('error', {'error': repr(e)})
             print(repr(e))
             return False
+            
+    elif (plotter == 'dmp161'):
+        try:
+            tty = serial.Serial(port = port, baudrate = 9600, parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS, timeout = 2.0)
+        except SerialException as e:
+            socketio.emit('error', {'error': repr(e)})
+            print(repr(e))
+            return False
     else:
         try:
             tty = serial.Serial(port, baudrate = 9600, timeout=2.0)
@@ -159,9 +167,9 @@ def sendToPlotter(socketio, hpglfile, port = 'COM3', baud = 9600, plotter = '747
     #     0x08 : 0: disable monitor mode, 1: enable monitor mode
     #     0x10 : 0: normal mode, 1: block mode
     try:
-        plotter_cmd(tty, b'\033.@;0:')  # Plotter Configuration [Manual 10-27]
-        plotter_cmd(tty, b'\033.Y')  # Plotter On [Manual 10-26]
-        plotter_cmd(tty, b'\033.K')  # abort graphics
+        # plotter_cmd(tty, b'\033.@;0:')  # Plotter Configuration [Manual 10-27]
+        # plotter_cmd(tty, b'\033.Y')  # Plotter On [Manual 10-26]
+        # plotter_cmd(tty, b'\033.K')  # abort graphics
         plotter_cmd(tty, b'IN;')  # HPGL initialize
 #        plotter_cmd(tty, b'\033.0')  # raise error
         # Output Buffer Size [Manual 10-36]
