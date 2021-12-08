@@ -6,7 +6,7 @@ sudo apt-get -y install libgeos-c1v5 libgeos-3.7.1
 sudo apt-get -y install libatlas-base-dev
 mkdir webplotter
 cd webplotter
-git clone https://github.com/henrytriplette/penplotter-webserver .
+git clone https://github.com/jimmykl/penplotter-webserver .
 # python3 -m venv venv
 # source venv/bin/activate
 sudo pip3 install -r requirements.txt
